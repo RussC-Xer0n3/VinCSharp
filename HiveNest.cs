@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
@@ -55,15 +56,12 @@ public class HiveNest
 		int d;
 
 		int n = Program.N_qty;
-		
-		double vol = Math.Pow(Program.V_qty, 3.0);
 
-		Random index = new Random((int) vol);
 		Random neuron = new Random(n);
 
 		for (d = 0; d < n; d++)
 		{
-			bees.TryAdd(d, Neuron.Neuron_cell);
+			bees.TryAdd(d, Neuron.Neuron_cell());
 		}
 
 		foreach (object i in bees) { Console.WriteLine("Value of Bees Dictionary after adding Neurons " + i); }
@@ -73,40 +71,56 @@ public class HiveNest
 		hivenest();
 		bee();
 
-		int e, f, g, h, i;
+		RandomWeights[] weights = new RandomWeights[Program.N_qty];
+		
+		int e, f, g, h, i, x, y, z;
+		int ID = 0;
 
+		double w = 0.0;
         double vol = Math.Pow(Program.V_qty, 3.0);
 
         Random index = new Random((int)v);
+		Random weight = new Random(Program.N_qty);
 
-		int ID = index.Next((int) vol);
+		List<int> IDz = new List<int>();
 
         for (e = 0; e < bees.Count; e++)
 		{
-			int x = index.Next();
-			int y = index.Next();
-			int z = index.Next();
-
-			
-			for (int yy = 0; yy < e; yy++)
+			for (int yy = 0; yy < e-1; yy++)
 			{
 				Object[] neuro = Neuron.Neuron_cell();
-				
-				for (int xx = 0; xx < neuro.Length; xx++)
-				{
-					neuro[xx] = bees.GetValueOrDefault(xx);
-				}
 
+				ID = index.Next((int)vol);
+				
+				if (IDz.Contains(ID)) {
+                    ID = index.Next((int)vol);
+				} else
+				{
+					IDz.Add(ID);
+                }
+
+                x = GetX.getx(ID);
+                y = GetY.gety(ID);
+                z = GetZ.getz(ID);
+
+                w = weight.Next();
+
+                neuro.SetValue(Training.train(), 0);
+				neuro.SetValue(w, 7);
 				neuro.SetValue(x, 8);
 				neuro.SetValue(y, 9);
 				neuro.SetValue(z, 10);
 				neuro.SetValue(ID, 11);
 
-				if (x + y + z == ID)
+				if (x * y * z == ID)
 				{
 					hive[x, y, z] = neuro;
 				}
+
+				for (int p = 0; p < neuro.Length; p++) { Console.WriteLine(neuro.GetValue(p).ToString()); }
 			}
+			Console.WriteLine("Identities of the cells............");	
+			foreach (int j in IDz) { Console.WriteLine(j); }
 		}
 
 		/**

@@ -73,7 +73,7 @@ class Neuron
         Green green = new Green();
         SurfaceSphere surface = new SurfaceSphere();
 
-        neuron[0] = Training.train(); //0 - Training module or sigmoid etc etc, initially empty method, new class method Added in HiveNest mapping.
+        neuron[0] = 0; //0 - Training module or sigmoid etc etc, initially empty method, new class method Added in HiveNest mapping.
         neuron[1] = Touch.touch(Program.Rad); //1 - Mating zone, the quintessential zone of mating, energy transfer, bioelectrical transfer, atomic emf/emp bonds
         neuron[2] = Green.green(Program.Rad); //2 - emf
         neuron[3] = Red.red(Program.Rad); //3 - red zone, widest emf radii

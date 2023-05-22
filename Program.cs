@@ -36,7 +36,7 @@ class Program {
         get { return rad; }
         set { rad = value; }
     }
-    public static void Main(String[] args)
+    public static void Main()
     {
         v_qty = 4;
         n_qty = 32;

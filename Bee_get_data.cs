@@ -19,8 +19,8 @@ public class Bee_get_data
                 {
                     for (i = 0; i < v; i++)
                     {
-                        Console.WriteLine("Values from Bee_get_data.getBee() {0}" + bee);
                         bee = HiveNest.Cells.TryGetValue(f, out i);
+                        Console.WriteLine("Values from Bee_get_data.getBee() {0}" + bee);
                     }
                 }
             }

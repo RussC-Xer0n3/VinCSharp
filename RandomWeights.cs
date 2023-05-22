@@ -2,7 +2,7 @@
 
 public class RandomWeights
 {
-    public double[] random_weights()
+    public static double[] random_weights()
     {
         Program prog = new Program();
         
